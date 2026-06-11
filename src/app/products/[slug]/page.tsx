@@ -42,6 +42,13 @@ const infoCards = [
   },
 ] as const;
 
+function getBrandHref(brand: string) {
+  return {
+    pathname: "/",
+    query: { search: brand },
+  };
+}
+
 function getFooterHref(item: string) {
   if (item === "About Us") {
     return "/about";
@@ -138,9 +145,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
                         {brandsMenu.columns.map((column, index) => (
                           <div key={`${group.label}-${index}`} className={styles.brandColumn}>
                             {column.map((item) => (
-                              <button key={item} type="button" className={styles.brandMenuItem}>
+                              <Link key={item} href={getBrandHref(item)} className={styles.brandMenuItem}>
                                 {item}
-                              </button>
+                              </Link>
                             ))}
                           </div>
                         ))}

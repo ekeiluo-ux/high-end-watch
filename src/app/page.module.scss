@@ -161,7 +161,7 @@
 
 .navItem:hover > button,
 .navItem > button:hover {
-  color: #111111;
+  color: #a0a2a7;
 }
 
 .navDropdown {
@@ -208,6 +208,7 @@
   color: #555555;
   text-align: left;
   padding: 0;
+  text-decoration: none;
 }
 
 .brandColumns {
@@ -219,7 +220,7 @@
 .brandMenuItem {
   font-size: 13px;
   line-height: 1.25;
-  cursor: default;
+  cursor: pointer;
 }
 
 .navDropdown a {
@@ -227,8 +228,10 @@
   color: var(--foreground-soft);
 }
 
-.navDropdown a:hover {
-  color: var(--foreground);
+.navDropdown a:hover,
+.brandMenuItem:hover,
+.brandMenuItem:focus-visible {
+  color: #a0a2a7;
 }
 
 .hero {
