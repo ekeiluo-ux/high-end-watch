@@ -1,0 +1,36 @@
+{
+  "name": "watch",
+  "version": "1.0.0",
+  "description": "High-fidelity luxury watch collection landing page",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "nextjs",
+    "luxury-watches",
+    "homepage"
+  ],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "dependencies": {
+    "next": "^16.2.7",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.7",
+    "sass": "^1.100.0",
+    "typescript": "^6.0.3"
+  }
+}

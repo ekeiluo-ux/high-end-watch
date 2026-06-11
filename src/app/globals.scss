@@ -1,0 +1,50 @@
+:root {
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f7f7f5;
+  --foreground: #141414;
+  --foreground-soft: #525252;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.18);
+  --accent: #b38a54;
+  --accent-dark: #8a6639;
+  --shadow: 0 16px 40px rgba(20, 20, 20, 0.06);
+  --max-width: 1500px;
+  --page-gutter: clamp(24px, 8.6vw, 96px);
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "Iowan Old Style", "Times New Roman", serif;
+  --font-figtree: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  font-weight: 400;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

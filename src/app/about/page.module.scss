@@ -1,0 +1,614 @@
+.page {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.container {
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--max-width));
+  margin: 0 auto;
+}
+
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: #111111;
+  color: #f3efe8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topBarRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  overflow-x: auto;
+}
+
+.topBarText {
+  cursor: default;
+  pointer-events: none;
+  user-select: none;
+}
+
+.header {
+  position: sticky;
+  top: 36px;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0 18px;
+}
+
+.logoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.logoEyebrow {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--foreground-soft);
+}
+
+.logoWordmark {
+  font-family: var(--font-serif);
+  font-size: 34px;
+  letter-spacing: 0.02em;
+}
+
+.nav {
+  position: relative;
+  z-index: 41;
+  border-top: 1px solid var(--border);
+}
+
+.navList {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  position: relative;
+  padding: 0;
+}
+
+.navItem > button {
+  border: 0;
+  background: transparent;
+  padding: 16px 0;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  cursor: pointer;
+  position: relative;
+  transition: all 180ms ease;
+}
+
+.navItem > button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: #111111;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 180ms ease;
+}
+
+.navItem:hover > button::after,
+.navItem > button:hover::after {
+  transform: scaleX(1);
+}
+
+.navItem:hover > button,
+.navItem > button:hover {
+  color: #111111;
+}
+
+.navDropdown {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  z-index: 60;
+  min-width: 220px;
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all 180ms ease;
+}
+
+.navItem:hover .navDropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.brandsDropdown {
+  width: min(826px, calc(100vw - (var(--page-gutter) * 2)));
+  padding: 18px 18px 20px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  align-items: start;
+}
+
+.brandColumns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.brandColumn {
+  display: grid;
+  gap: 12px;
+}
+
+.brandMenuItem {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #555555;
+  text-align: left;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.25;
+  cursor: default;
+  text-decoration: none;
+}
+
+.navDropdown a {
+  font-size: 14px;
+  color: var(--foreground-soft);
+}
+
+.navDropdown a:hover {
+  color: var(--foreground);
+}
+
+.heroSection,
+.storySection,
+.boutiqueSection,
+.reviewSection,
+.socialSection {
+  padding: 56px 0;
+}
+
+.heroFrame {
+  display: grid;
+  place-items: center;
+  min-height: clamp(360px, 58vw, 620px);
+  padding: 48px;
+  border: 1px solid #e5e5e5;
+  background:
+    linear-gradient(180deg, rgba(17, 17, 17, 0.02), rgba(17, 17, 17, 0.04)),
+    #f8f8f6;
+  text-align: center;
+}
+
+.heroEyebrow,
+.sectionHeading p,
+.sectionHeadingCentered p,
+.socialCard p {
+  margin: 0 0 14px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+}
+
+.heroFrame h1,
+.sectionHeading h2,
+.sectionHeadingCentered h2,
+.socialCard h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(42px, 5vw, 74px);
+  line-height: 0.96;
+  font-weight: 500;
+}
+
+.heroFrame p:last-child {
+  max-width: 620px;
+  margin: 24px 0 0;
+  font-family: var(--font-figtree), sans-serif;
+  font-size: 16px;
+  line-height: 1.9;
+  color: #525252;
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.storySection .sectionHeading h2 {
+  font-size: 32px;
+  line-height: 1.15;
+}
+
+.sectionHeadingCentered {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.storyCopy {
+  display: grid;
+  gap: 22px;
+}
+
+.storyCopy p,
+.boutiqueCard p,
+.reviewCard p,
+.serviceText,
+.socialCard span {
+  margin: 0;
+  font-family: var(--font-figtree), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.9;
+  color: #525252;
+}
+
+.boutiqueSection {
+  background: #fbfbf9;
+}
+
+.boutiqueGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.boutiqueCard {
+  min-height: 250px;
+  display: grid;
+  align-content: space-between;
+  gap: 24px;
+  padding: 28px;
+  border: 1px solid #e5e5e5;
+  background: #ffffff;
+}
+
+.boutiqueCard h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.inlineLink {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.reviewLayout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 420px) auto;
+  gap: 48px;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewArrow {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #dddddd;
+  background: #ffffff;
+  color: #111111;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.reviewCard {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  padding: 36px 32px;
+  border: 1px solid #e5e5e5;
+  background: #ffffff;
+  text-align: center;
+}
+
+.reviewStars {
+  display: flex;
+  gap: 6px;
+  color: #c8a24e;
+}
+
+.reviewMeta {
+  font-size: 13px;
+  color: var(--foreground-soft);
+}
+
+.socialSection {
+  margin-top: 120px;
+  padding-top: 56px;
+  padding-bottom: 80px;
+  background: #f5f5f3;
+}
+
+.socialCard {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.socialCard p {
+  margin-bottom: 0;
+}
+
+.socialHandle {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(42px, 5vw, 74px);
+  line-height: 0.96;
+  font-weight: 500;
+  color: inherit;
+}
+
+.socialCard span {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.footer {
+  padding: 72px 0;
+  background: #111111;
+  color: #f4efe8;
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 64px;
+  align-items: start;
+}
+
+.footerMenuGroup {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 88px;
+  align-items: start;
+}
+
+.footer h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.footerTop h3 {
+  margin: 0 0 16px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244, 239, 232, 0.7);
+}
+
+.footerTop ul {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.footer li,
+.subscribeCard h3 {
+  margin: 0;
+  color: var(--foreground-soft);
+  line-height: 1.7;
+}
+
+.footer li {
+  font-weight: 400;
+}
+
+.footer li a,
+.footer li span {
+  color: rgba(244, 239, 232, 0.78);
+}
+
+.subscribeCard {
+  padding: 0;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  align-items: start;
+  gap: 16px;
+  min-height: 220px;
+  justify-self: end;
+}
+
+.footerLogoMark {
+  display: grid;
+  place-items: center;
+}
+
+.footerLogoOuter {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  border: 2px solid rgba(244, 239, 232, 0.32);
+}
+
+.footerLogoOuter::before {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 239, 232, 0.24);
+}
+
+.footerLogoOuter::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 1px;
+  height: 16px;
+  background: rgba(244, 239, 232, 0.28);
+  transform: translateX(-50%);
+  box-shadow:
+    0 84px 0 rgba(244, 239, 232, 0.28),
+    42px 42px 0 rgba(244, 239, 232, 0.24),
+    -42px 42px 0 rgba(244, 239, 232, 0.24);
+}
+
+.footerLogoInner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 239, 232, 0.22);
+}
+
+.footerLogoInner span {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  line-height: 1;
+  color: rgba(244, 239, 232, 0.56);
+}
+
+.subscribeCard h3 {
+  color: rgba(244, 239, 232, 0.46);
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 1.65vw, 22px);
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.footerBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 26px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(244, 239, 232, 0.12);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(244, 239, 232, 0.7);
+}
+
+@media (max-width: 1200px) {
+  .footerTop {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 960px) {
+  .storyGrid,
+  .boutiqueGrid,
+  .footerTop {
+    grid-template-columns: 1fr;
+  }
+
+  .brandsDropdown {
+    width: min(100vw - 24px, 720px);
+    grid-template-columns: 1fr;
+  }
+
+  .brandColumns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .footerMenuGroup {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .headerRow,
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reviewLayout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 720px) {
+  .topBarRow,
+  .navList {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brandsDropdown {
+    width: min(100vw - 24px, 420px);
+    left: 0;
+    padding: 14px;
+  }
+
+  .brandColumns {
+    grid-template-columns: 1fr;
+  }
+
+  .heroFrame {
+    min-height: 300px;
+    padding: 32px 24px;
+  }
+
+  .heroFrame h1,
+  .sectionHeading h2,
+  .sectionHeadingCentered h2,
+  .socialCard h2,
+  .socialHandle {
+    font-size: 40px;
+  }
+}
