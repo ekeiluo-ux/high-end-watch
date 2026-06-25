@@ -11,6 +11,8 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+type PricingMark = "check" | "dash" | "99%" | "100%";
+
 const infoCards = [
   {
     title: "Transaction Introduction",
@@ -88,9 +90,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const product = findProductByHandle(slug);
 
-  console.log("slug =", slug);
-  console.log("product =", product);
-
   if (!product) {
     notFound();
   }
@@ -108,6 +107,89 @@ export default async function ProductDetailPage({ params }: PageProps) {
     { label: "Case Dimension", value: detailProduct.caseDimension },
     { label: "Box & Papers", value: detailProduct.boxAndPapers },
   ].filter((item) => item.value);
+  const pricingPlans = [
+    {
+      title: "Level A",
+      description: "At this level, it's basically obvious at a glance that it is a FAKE. Apart from the resemblance in style, many details are not accurately replicated.",
+      price: "--",
+      note: "We don't sell this level",
+      noteWarning: true,
+      buttonText: "WE DON'T SELL",
+      buttonDisabled: true,
+      features: [
+        { label: "Brand New", status: "check" },
+        { label: "Free Shipping", status: "check" },
+        { label: "Intact Box", status: "cross" },
+        { label: "Certificate Description", status: "cross" },
+        { label: "Detail Restoration", status: "cross" },
+        { label: "Concierge Service", status: "cross" },
+      ],
+      theme: "light",
+    },
+    {
+      title: "Level A+",
+      description: "Equipped with all necessary accessories, it boasts an exquisite appearance with a 99% degree of detail reproduction. It can be worn as a daily choice.",
+      price: "$ 700",
+      note: "Add it to Shopping Cart and Order",
+      buttonText: "ADD TO SHOPPING CART",
+      buttonPrimary: true,
+      features: [
+        { label: "Brand New", status: "check" },
+        { label: "Free Shipping", status: "check" },
+        { label: "Intact Box", status: "check" },
+        { label: "Certificate Description", status: "check" },
+        { label: "Detail Restoration (99%)", status: "check" },
+        { label: "Concierge Service", status: "cross" },
+      ],
+      theme: "muted",
+    },
+    {
+      title: "1:1 High-End",
+      description: "1:1 High-End Clone, with impeccable details and complete accessories. If dissatisfied, customers can communicate for returns or exchanges.",
+      price: "$$$",
+      note: "Contact and place an order via WhatsApp",
+      buttonText: "CONTACT VIA WHATSAPP",
+      buttonInverted: true,
+      buttonLink: "https://wa.me/447942866158",
+      features: [
+        { label: "Brand New", status: "check-circle" },
+        { label: "Free Shipping", status: "check-circle" },
+        { label: "Intact Box", status: "check-circle" },
+        { label: "Certificate Description", status: "check-circle" },
+        { label: "Detail Restoration (99%)", status: "check-circle" },
+        { label: "Concierge Service", status: "check-circle" },
+      ],
+      theme: "dark",
+    }
+  ];
+
+  function renderFeatureIcon(status: string) {
+     if (status === "check") {
+       return (
+         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+           <circle cx="12" cy="12" r="12" fill="#111" />
+           <path d="M17 8L10 15L7 12" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+         </svg>
+       );
+     }
+    if (status === "cross") {
+      return (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="12" fill="#E5E5E5" />
+          <path d="M16 8L8 16M8 8L16 16" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+        </svg>
+      );
+    }
+    if (status === "check-circle") {
+      return (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="12" fill="#fff" />
+          <path d="M17 8L10 15L7 12" stroke="#111" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      );
+    }
+    return null;
+  }
 
   return (
     <main className={styles.page}>
@@ -195,19 +277,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
             <p className={styles.vendor}>{detailProduct.vendor}</p>
             <h1>{detailProduct.title}</h1>
 
-            <div className={styles.assuranceRow}>
-              <span>100% High-end Clone</span>
-              <span>Hot Collectibles</span>
-            </div>
-
-            <p className={styles.overview}>{detailProduct.overview}</p>
-
-            <div className={styles.summaryActions}>
-              <a href="https://wa.me/447942866158" target="_blank" rel="noreferrer" className={styles.primaryAction}>
-                Inquire on WhatsApp
-              </a>
-            </div>
-
             {specItems.length ? (
               <div className={styles.specList} aria-label="Product specifications">
                 {specItems.map((item) => (
@@ -224,6 +293,41 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
       <section className={styles.servicesSection}>
         <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Prices</h2>
+          <section className={styles.pricingModule} aria-label="Pricing levels">
+            <div className={styles.pricingGrid}>
+              {pricingPlans.map((plan) => (
+                <div key={plan.title} className={`${styles.pricingPanel} ${styles[`pricingPanel_${plan.theme}`]}`}>
+                  <h3 className={styles.pricingTitle}>{plan.title}</h3>
+                  <p className={styles.pricingDescription}>{plan.description}</p>
+                  <div className={styles.pricingDivider} />
+                  <div className={styles.pricingPrice}>{plan.price}</div>
+                  <p className={`${styles.pricingNote} ${plan.noteWarning ? styles.pricingNoteWarning : ""}`}>
+                    {plan.note}
+                  </p>
+                  {plan.buttonLink ? (
+                    <a href={plan.buttonLink} target="_blank" rel="noreferrer" className={styles.pricingButton}>
+                      {plan.buttonText}
+                    </a>
+                  ) : (
+                    <button type="button" className={styles.pricingButton} disabled={plan.buttonDisabled}>
+                      {plan.buttonText}
+                    </button>
+                  )}
+                  <div className={styles.pricingFeatures}>
+                    {plan.features.map((feature) => (
+                      <div key={feature.label} className={styles.pricingFeatureRow}>
+                        <span className={styles.pricingFeatureIcon}>{renderFeatureIcon(feature.status)}</span>
+                        <span className={styles.pricingFeatureLabel}>{feature.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <h2 className={styles.sectionTitle}>Services Provided</h2>
           <div className={styles.serviceGrid}>
             {infoCards.map((card) => (
               <article key={card.title} className={styles.serviceCard}>
